@@ -21,31 +21,35 @@ package info.pavie.basicosmparser.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import info.pavie.basicosmparser.TestSuite;
-import info.pavie.basicosmparser.model.Element;
-import info.pavie.basicosmparser.model.Node;
-import info.pavie.basicosmparser.model.Relation;
-import info.pavie.basicosmparser.model.Way;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import info.pavie.basicosmparser.TestSuite;
+import info.pavie.basicosmparser.model.Element;
+import info.pavie.basicosmparser.model.Node;
+import info.pavie.basicosmparser.model.Relation;
+import info.pavie.basicosmparser.model.Way;
+
 /**
  * Test class for {@link OSMParser}.
+ * 
  * @author Adrien PAVIE
  */
 public class TestOSMParser {
-//ATTRIBUTES
+//ATTRIBUTES 
 	private OSMParser p1;
-	private Map<String,Element> result;
-	
+	private Map<String, Element> result;
+
 //SETUP
 	@Before
 	public void setUp() throws Exception {
@@ -58,7 +62,7 @@ public class TestOSMParser {
 	 * Test data from sample.osm
 	 */
 	private void testSampleFile() {
-		//First node
+		// First node
 		Node n1 = (Node) result.get("N298884269");
 		assertEquals(54.0901746, n1.getLat(), 0);
 		assertEquals(12.2482632, n1.getLon(), 0);
@@ -69,8 +73,8 @@ public class TestOSMParser {
 		assertEquals(676636, n1.getChangeset());
 		assertEquals("2008-09-21T21:37:45Z", n1.getTimestamp());
 		assertEquals(0, n1.getTags().size());
-		
-		//Tagged node
+
+		// Tagged node
 		Node n2 = (Node) result.get("N1831881213");
 		assertEquals(54.0900666, n2.getLat(), 0);
 		assertEquals(12.2539381, n2.getLon(), 0);
@@ -83,8 +87,8 @@ public class TestOSMParser {
 		assertEquals(2, n2.getTags().size());
 		assertEquals("Neu Broderstorf", n2.getTags().get("name"));
 		assertEquals("city_limit", n2.getTags().get("traffic_sign"));
-		
-		//Way
+
+		// Way
 		Way w1 = (Way) result.get("W26659127");
 		assertEquals("Masch", w1.getUser());
 		assertEquals(55988, w1.getUid());
@@ -99,8 +103,8 @@ public class TestOSMParser {
 		assertEquals(result.get("N298884269"), w1.getNodes().get(0));
 		assertEquals(result.get("N298884272"), w1.getNodes().get(1));
 		assertEquals(result.get("N261728686"), w1.getNodes().get(2));
-		
-		//Relation
+
+		// Relation
 		Relation r1 = (Relation) result.get("R56688");
 		assertEquals("kmvar", r1.getUser());
 		assertEquals(56190, r1.getUid());
@@ -123,36 +127,36 @@ public class TestOSMParser {
 		assertEquals("stop", r1.getMemberRole(result.get("N298884269")));
 		assertEquals("path", r1.getMemberRole(result.get("W26659127")));
 	}
-	
+
 	@Test
-	public void testParseFile() throws IOException, SAXException {
+	public void testParseFile() throws IOException, SAXException, ParserConfigurationException {
 		result = p1.parse(new File("res/xml/sample.osm"));
 		testSampleFile();
 	}
-	
+
 	@Test
-	public void testParseString() throws IOException, SAXException {
+	public void testParseString() throws IOException, SAXException, ParserConfigurationException {
 		String osmXml = TestSuite.readTextFile(new File("res/xml/sample.osm"));
 		result = p1.parse(osmXml);
 		testSampleFile();
 	}
-	
+
 	@Test
-	public void testParseInputSource() throws IOException, SAXException {
+	public void testParseInputSource() throws IOException, SAXException, ParserConfigurationException {
 		String osmXml = TestSuite.readTextFile(new File("res/xml/sample.osm"));
 		result = p1.parse(new InputSource(new ByteArrayInputStream(osmXml.getBytes("UTF-8"))));
 		testSampleFile();
 	}
-	
+
 	@Test
-	public void testParseVillage() throws IOException, SAXException {
+	public void testParseVillage() throws IOException, SAXException, ParserConfigurationException {
 		result = p1.parse(new File("res/xml/bleruais.osm"));
 		Way single1 = (Way) result.get("W108790362");
 		assertEquals(2, single1.getNodes().size());
-		
+
 		Way single4_1 = (Way) result.get("W108790361");
 		assertEquals(2, single4_1.getNodes().size());
-		
+
 		Way single4_2 = (Way) result.get("W108790366");
 		assertEquals(2, single4_2.getNodes().size());
 		assertEquals(single4_1.getNodes().get(1), single4_2.getNodes().get(0));

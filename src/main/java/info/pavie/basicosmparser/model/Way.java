@@ -23,37 +23,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A way is an OSM element, which combines several {@link Node}s to create a path.
+ * A way is an OSM element, which combines several {@link Node}s to create a
+ * path.
+ * 
  * @author Adrien PAVIE
  */
 public class Way extends Element {
 //ATTRIBUTES
 	/** The list of nodes of the way **/
 	private List<Node> nodes;
-	
+
 //CONSTRUCTOR
 	/**
 	 * Default constructor
-	 * @param id The object ID
+	 * 
+	 * @param id    The object ID
 	 * @param nodes Its nodes
 	 */
 	public Way(long id, List<Node> nodes) {
 		super(id);
-		
-		//Conditions on nodes
-		if(nodes == null) {
+
+		// Conditions on nodes
+		if (nodes == null) {
 			throw new NullPointerException("Nodes list can't be null");
 		}
-		if(nodes.size() < 2) {
+		if (nodes.size() < 2) {
 			throw new RuntimeException("A way should have at least two nodes");
 		}
-		
+
 		this.nodes = nodes;
 	}
-	
+
 	/**
-	 * Constructor without nodes, not safe to use !
-	 * Don't forget to add at least two nodes
+	 * Constructor without nodes, not safe to use ! Don't forget to add at least two
+	 * nodes
+	 * 
 	 * @param id The object ID
 	 */
 	public Way(long id) {
@@ -64,7 +68,7 @@ public class Way extends Element {
 //ACCESSORS
 	@Override
 	public String getId() {
-		return "W"+id;
+		return "W" + id;
 	}
 
 	/**
@@ -81,12 +85,12 @@ public class Way extends Element {
 	public void addNode(Node n) {
 		nodes.add(n);
 	}
-	
+
 	/**
 	 * @param index The index of the node to remove
 	 */
 	public void removeNode(int index) {
-		if(nodes.size() == 2) {
+		if (nodes.size() == 2) {
 			throw new RuntimeException("Can't remove node, only two remaining");
 		}
 		nodes.remove(index);

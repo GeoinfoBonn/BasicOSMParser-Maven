@@ -21,6 +21,7 @@ package info.pavie.basicosmparser.model;
 
 /**
  * A node is an OSM element with coordinates.
+ * 
  * @author Adrien PAVIE
  */
 public class Node extends Element {
@@ -29,11 +30,12 @@ public class Node extends Element {
 	private double lat;
 	/** The longitude **/
 	private double lon;
-	
+
 //CONSTRUCTOR
 	/**
 	 * Default constructor
-	 * @param id The object ID
+	 * 
+	 * @param id  The object ID
 	 * @param lat The latitude
 	 * @param lon The longitude
 	 */
@@ -46,7 +48,7 @@ public class Node extends Element {
 //ACCESSORS
 	@Override
 	public String getId() {
-		return "N"+id;
+		return "N" + id;
 	}
 
 	/**

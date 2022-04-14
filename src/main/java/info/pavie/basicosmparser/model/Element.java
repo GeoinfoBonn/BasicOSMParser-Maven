@@ -24,6 +24,7 @@ import java.util.Map;
 
 /**
  * An element is a generic OSM object.
+ * 
  * @author Adrien PAVIE
  */
 public abstract class Element {
@@ -43,23 +44,25 @@ public abstract class Element {
 	/** The last changeset ID **/
 	protected long changeset;
 	/** The objects tags, which describe it **/
-	protected Map<String,String> tags;
+	protected Map<String, String> tags;
 
 //CONSTRUCTOR
 	/**
-	 * Default constructor, initializes ID, version, visibility and tags. 
+	 * Default constructor, initializes ID, version, visibility and tags.
+	 * 
 	 * @param id The element ID
 	 */
 	public Element(long id) {
 		this.id = id;
 		version = 1;
 		visible = true;
-		tags = new HashMap<String,String>();
+		tags = new HashMap<String, String>();
 	}
 
 //ACCESSORS
 	/**
-	 * @return the ID, with format : X000000, where X is the object type (N: node, W: way, R: relation)
+	 * @return the ID, with format : X000000, where X is the object type (N: node,
+	 *         W: way, R: relation)
 	 */
 	public abstract String getId();
 
@@ -111,10 +114,10 @@ public abstract class Element {
 	public Map<String, String> getTags() {
 		return tags;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Element "+getId()+" ("+getTags()+")";
+		return "Element " + getId() + " (" + getTags() + ")";
 	}
 
 //MODIFIERS
@@ -162,15 +165,17 @@ public abstract class Element {
 
 	/**
 	 * Add a tag
-	 * @param key The tag key
+	 * 
+	 * @param key   The tag key
 	 * @param value The tag value
 	 */
 	public void addTag(String key, String value) {
 		tags.put(key, value);
 	}
-	
+
 	/**
 	 * Remove the given tag
+	 * 
 	 * @param key The tag key
 	 */
 	public void deleteTag(String key) {
