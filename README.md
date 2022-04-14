@@ -26,7 +26,7 @@ You can use the code with Maven by adding the following lines into your `pom.xml
 Alternatively, you can put the content of `src/main/` folder in the source directory 
 of your project. Then, add this code in your classes to import the parser:
 
-```
+```java
 import info.pavie.basicosmparser.controller.*;
 import info.pavie.basicosmparser.model.*;
 ```
@@ -42,15 +42,13 @@ Here is a simple example of how to use the parser. You just need to create a new
 object, and then call the <code>parse</code> method.
 
 ```java
-OSMParser p = new OSMParser();						//Initialization of the parser
-File osmFile = new File("/path/to/your/data.osm");	//Create a file object for your OSM XML file
+OSMParser p = new OSMParser();                      //Initialization of the parser
+File osmFile = new File("/path/to/your/data.osm");  //Create a file object for your OSM XML file
 
 try {
-
-	Map<String,Element> result = p.parse(osmFile);		//Parse OSM data, and put result in a Map object
-
+	Map<String,Element> result = p.parse(osmFile);    //Parse OSM data, and put result in a Map object
 } catch (IOException | SAXException e) {
-	e.printStackTrace();								//Input/output errors management
+	e.printStackTrace();                              //Input/output errors management
 }
 ```
 
