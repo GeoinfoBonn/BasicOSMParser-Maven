@@ -14,7 +14,7 @@ Installation (for developers)
 
 You can use the code with Maven by adding the following lines into your `pom.xml`:
 
-```
+```xml
 <!-- BasicOMSParser -->
 <dependency>
 	<groupId>info.pavie</groupId>
@@ -23,8 +23,8 @@ You can use the code with Maven by adding the following lines into your `pom.xml
 </dependency>
 ```
 
-Alternatively, you can put the content of src/main/ folder in the source directory 
-of your project. Then, add this code in your classes to import the parser :
+Alternatively, you can put the content of `src/main/` folder in the source directory 
+of your project. Then, add this code in your classes to import the parser:
 
 ```
 import info.pavie.basicosmparser.controller.*;
@@ -41,7 +41,7 @@ Usage
 Here is a simple example of how to use the parser. You just need to create a new parser
 object, and then call the <code>parse</code> method.
 
-```
+```java
 OSMParser p = new OSMParser();						//Initialization of the parser
 File osmFile = new File("/path/to/your/data.osm");	//Create a file object for your OSM XML file
 
@@ -66,7 +66,7 @@ See the Javadoc of these classes for more details about the available methods.
 
 If you want to get parsed data as several CSV files, use a <code>CSVExporter</code> object :
 
-```
+```java
 Map<String,Element> result = p.parse(osmFile);
 CSVExporter exporter = new CSVExporter();
 exporter.export(result, new File("/output/path/for/csv/"));	//Throws IOException if error occurs during writing
@@ -78,7 +78,7 @@ See the Javadoc of CSVExporter to know more about output CSV format.
 
 If you only want to use this parser to create CSV files, you can execute the JAR with the following command :
 
-```
+```sh
 java -jar BasicOSMParser.jar /path/to/data.osm /path/to/output/folder/
 ```
 
